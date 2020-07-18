@@ -1,5 +1,8 @@
 import string
-
+import sys
+from colorama import Fore, Back, Style
+from colorama import init
+init(autoreset=True)
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import ssl
@@ -24,28 +27,37 @@ for line in fhand:
 	
 	words= words + line
 
-
-#print(words)
+# TYPE OF WORD
 	for word in words :
-		print(word)
-		url = "https://ordnet.dk/ddo/ordbog?query=%s" % (urllib.parse.quote(word)) # input('Enter URL- ')
-		html = urllib.request.urlopen(url, context=ctx).read()
+		print(Fore.YELLOW + word)
+		try:
+			url = "https://ordnet.dk/ddo/ordbog?query=%s" % (urllib.parse.quote(word)) # input('Enter URL- ')
+			html = urllib.request.urlopen(url, context=ctx).read()
 		
-		
-		soup = BeautifulSoup(html, 'html.parser')
-		#print(soup)
-		# # Retrieve all of the anchor tags
-		tags = soup('div')
-		
-		for tag in tags:
-			tag_class = tag.get('class', [])
-			if "definitionBoxTop" in tag_class:
-				# print(tag_class)
-				children = tag.findChildren("span" , recursive=False)
-				for child in children: 
-					span_class = child.get('class', [])
-					if "tekstmedium" in span_class:
-						print(child.text)
+			soup = BeautifulSoup(html, 'html.parser')
+			#print(soup)
+			# # Retrieve all of the anchor divs
+			divs = soup('div')
+			for div in divs:
+				div_class = div.get('class', [])
+				if "definitionBoxTop" in div_class:
+					# print(div_class)
+					children = div.findChildren("span" , recursive=False)
+					for child in children: 
+						span_class = child.get('class', [])
+						if "tekstmedium" in span_class:
+							type_word=child.text
+							print(Fore.CYAN  + type_word)
+# SOUND	
+			span = soup.body.find('span', attrs={'class': 'lydskrift'})
+			print(span.text)
+			for href in span.find_all('a', recursive=True):
+				print( Fore.GREEN + str(href.get('href', "NotFound")))
+
+		except:
+			print(Fore.RED + "not found " )
+
+
 
 
 
