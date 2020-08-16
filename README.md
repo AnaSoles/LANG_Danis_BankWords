@@ -13,7 +13,7 @@ https://en.bab.la/dictionary/danish-english
 
 ## Procedure
 
-A way to read is passing thorugh each word in a sentence, trying to find the meaning and also the tense.
+A way to read is passing through each word in a sentence, trying to find the meaning and also the tense.
 For that reason in this tool it is necessary to add the sentence we want to understand as main input.
 
 ### Input Files:
