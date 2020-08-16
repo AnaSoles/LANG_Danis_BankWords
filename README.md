@@ -3,6 +3,14 @@
 
 This tool creates, registers and storages the words that you have read in Dannish Language with their english meaning, grammatical type, sound, phoneme and the sentence where it come from and the translation of the complete sentence. 
 
+## Source
+
+- Danish Dictionary
+https://ordnet.dk
+
+- English-Danish Dictionary
+https://en.bab.la/dictionary/danish-english
+
 ## Procedure
 
 A way to read is passing thorugh each word in a sentence, trying to find the meaning and also the tense.
