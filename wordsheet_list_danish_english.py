@@ -146,8 +146,9 @@ for line in fhand:
 				div_class = div.get('class', [])
 				# Target the type of word 
 				if "definitionBoxTop" in div_class:
-					# print(div_class)
+					#print(div_class)
 					children = div.findChildren("span" , recursive=False)
+					#print(children)
 					for child in children: 
 						span_class = child.get('class', [])
 						if "tekstmedium" in span_class:
@@ -155,7 +156,7 @@ for line in fhand:
 
 							type_word=child.text
 							print(type_word)
-
+# -------------------------- R O O T  W O R D  F O U N D ------------------------------
 						if "match" in span_class:
 							root_word=child.text
 							for s in SYMBOLS:
@@ -163,7 +164,7 @@ for line in fhand:
 
 							print(Fore.CYAN  + root_word )
 
-# PHONEME AND SOUND	
+# .................... P H O N E M E   A N D   S O U N D  .............................	
 			span = soup.body.find('span', attrs={'class': 'lydskrift'})
 #............................ P H O N E M A ................................... 
 			phonema=span.text
@@ -176,14 +177,20 @@ for line in fhand:
 				print( Fore.MAGENTA + str(mp3) )
 
 
-# English meaning
+# .................. E N G L I S H   M E A N I N G  ..........................................
 			url = "https://en.bab.la/dictionary/danish-english/%s" % (urllib.parse.quote(root_word)) 
 			html = urllib.request.urlopen(url, context=ctx).read()
 			soup = BeautifulSoup(html, 'html.parser')
-			span = soup.body.find('ul', attrs={'class': 'sense-group-results'})
+
+			divs = soup.findAll("div", {"class": "quick-result-overview"})
+			for div in divs:
+				if "Our team was informed" in div.text:
+					raise Exception('error', 'word not found')
+
+			span_2 = soup.body.find('ul', attrs={'class': 'sense-group-results'})
 #			print(span)
 #............................ M E A N I N  G  ................................... 
-			meaning=span.text 
+			meaning=span_2.text 
 
 			print(Fore.RED + meaning + "\n ")
 
