@@ -28,15 +28,14 @@ For that reason in this tool it is necessary to add the sentence we want to unde
 
 ### Steps
 
- - Modify the path name with the one you have your excel sheet file and text file in line29 .
+ - Modify the path name with the one you have your excel sheet file and text file in *line29* .
 
-# 			READ FORMER EXCEL 
 
-# ----------------- P A T H -----------------------------------
+
 PATH_XLS_FILE='C:\\Users\\Ana Maria\\Documents\\DS\\APP_DK_ord\\'
-# ----------------- P A T H -----------------------------------
 
-- Modify the name of your excel sheet as the one you have in line 43
+
+- Modify the name of your excel sheet as the one you have in *line 43*
 
 book = open_workbook('DK_WORDS_0.xlsx')
 
