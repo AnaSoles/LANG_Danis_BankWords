@@ -23,3 +23,5 @@ For that reason in this tool it is necessary to add the sentence we want to unde
 
 ### Output File:
 - Excel Sheet with the words  and properties of the words added
+
+![sheetJPG](https://user-images.githubusercontent.com/52880203/90572036-58986780-e1b3-11ea-8695-4f7faa48e8c2.JPG)
