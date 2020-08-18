@@ -25,3 +25,19 @@ For that reason in this tool it is necessary to add the sentence we want to unde
 - Excel Sheet with the words  and properties of the words added
 
 ![sheetJPG](https://user-images.githubusercontent.com/52880203/90572036-58986780-e1b3-11ea-8695-4f7faa48e8c2.JPG)
+
+### Steps
+
+ - Modify the path name with the one you have your excel sheet file and text file in line29 .
+
+# 			READ FORMER EXCEL 
+
+# ----------------- P A T H -----------------------------------
+PATH_XLS_FILE='C:\\Users\\Ana Maria\\Documents\\DS\\APP_DK_ord\\'
+# ----------------- P A T H -----------------------------------
+
+- Modify the name of your excel sheet as the one you have in line 43
+
+book = open_workbook('DK_WORDS_0.xlsx')
+
+- Run the script in an cmd, it will ask you the name of your txt file, where it is the sentence you want to get the words. Write down the file name.
