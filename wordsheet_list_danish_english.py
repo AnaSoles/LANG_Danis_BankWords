@@ -63,6 +63,10 @@ for i in range(1, sheet.nrows):
 #  ..........  D I C T I O N A R T    T U P L E    ..............
 	dict_word_type[k_word]= (k_phonema,k_type, k_meaning, k_sound, k_sentence,k_translation) # key-> tuple
 
+	#for (k,v) in dict_word_type.items():
+	#	if 
+
+
 #print(dict_word_type)
 #print(dict_word_type["elsker"])
 	#... = row[1])
@@ -197,7 +201,7 @@ for line in fhand:
 #............................ T R A N S L A T I O N  ................................... 
 
 			
-# 							NEW DICTIONARY 
+# 							N E W    D I C T I O N A R Y 
 
 			dict_word_type[word]= (phonema,type_word, meaning, mp3, str(sentences), g_translation) # key-> tuple
 
@@ -205,7 +209,7 @@ for line in fhand:
 		except:
 			print("not found " )
 			meaning="not found "
-			dict_word_type[word]= ("", "", meaning, "", str(sentences), g_translation) # key-> tuple
+			dict_word_type[word]= (phonema,type_word, meaning, mp3, str(sentences), g_translation) # key-> tuple
 			
 
 #CSV MODE
@@ -229,6 +233,8 @@ for line in fhand:
 	# sheet.column_dimensions['E'].width = 50
 	# workbook.save(  PATH_XLS_FILE  + "DK_WORDS.xlsx") 
 	#worksheet1.set_column(20, 20, 20,50)
+	
+# -------------------- C E L L  H E A D E R  F O R M A T ------------------------------------	
 		# Cell color for header names - Tipo B Tipo C Tipo D  Period  Intensity
 	cell_format = workbook.add_format({'bold': True, 'font_color': 'white'})
 	cell_format.set_bg_color('#004C99')
@@ -236,6 +242,8 @@ for line in fhand:
 	cell_format.set_align('center')
 	cell_format.set_align('top')
 	cell_format.set_border(1)
+
+# -------------------- C R E A T I N G   W O R K S H E E T  "A L L  T Y P E S"  ------------------------------------	
 # Creating Worksheets
 	current_sheet = workbook.add_worksheet("ALL_TYPES")
 #	current_sheet = workbook.add_worksheet("Sounds")
@@ -249,23 +257,44 @@ for line in fhand:
 	current_sheet.write(0, 4 , "Sound", cell_format)
 	current_sheet.write(0, 5 , "Sentence", cell_format)
 	current_sheet.write(0, 6 , "Translation", cell_format)
-#----------------- excel mode --------------------------
+
+
+# -------------------- C E L L  C O N T E N T   F O R M A T ------------------------------------	
+		# Cell color for header names - Tipo B Tipo C Tipo D  Period  Intensity
+	cell_format_2 = workbook.add_format({'bold': False, 'font_color': 'black'})
+	#cell_format.set_bg_color('#004C99')
+	cell_format_2.set_text_wrap()
+	#cell_format.set_align('center')
+	#cell_format_2.set_align('top')
+	#cell_format_2.set_border(1)
+
+
+# -------------------- C E L L  C O N T E N T  A N D   F O R M A T ------------------------------------	
 
 	for all_word in dict_word_type:
 		(all_phonema, all_type, all_meaning, all_sound, all_sentences, all_translation) = dict_word_type[all_word]
+
+
 		current_sheet.set_column('A:A', 20)
 		current_sheet.set_column('C:C', 20)
 		current_sheet.set_column('D:D', 25)
 		current_sheet.set_column('F:F', 80) 
 		current_sheet.set_column('G:G', 80)
 		current_line= current_line + 1
-		current_sheet.write(current_line, 0 , all_word )
+		current_sheet.write(current_line, 0 , all_word)
 		current_sheet.write(current_line, 1 , all_phonema )
 		current_sheet.write(current_line, 2 ,all_type)
-		current_sheet.write(current_line, 3 , all_meaning )
+		current_sheet.write(current_line, 3 , all_meaning)
 		current_sheet.write(current_line, 4 , all_sound)
-		current_sheet.write(current_line, 5 , all_sentences )
-		current_sheet.write(current_line, 6 , all_translation)
+		current_sheet.write(current_line, 5 , all_sentences, cell_format_2 )
+		current_sheet.write(current_line, 6 , all_translation, cell_format_2)
+
+# -------------------- C R E A T I N G   W O R K S H E E T  "V E R B S"------------------------------------	
+# Creating Worksheets
+#	current_sheet = workbook.add_worksheet("ALL_TYPES")
+#	current_sheet = workbook.add_worksheet("Verbs")
+#	current_sheet = workbook.add_worksheet("Vocabulary")
+#	current_sheet = workbook.add_worksheet("Conjunction")
 
 
 workbook.close()
