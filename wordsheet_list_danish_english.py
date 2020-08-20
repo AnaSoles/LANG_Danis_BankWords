@@ -40,7 +40,9 @@ from xlrd import open_workbook
 
 col_index=0
 
-book = open_workbook('DK_WORDS_0.xlsx')
+type_list=list()
+
+book = open_workbook('DK_WORD_3.xlsx')
 sheet = book.sheet_by_index(0)
 
 # read first row - Header 
@@ -48,6 +50,7 @@ keys = sheet.row_values(0)
 print(keys)
 #  read each rows 
 for i in range(1, sheet.nrows):
+# sheet.row_values gives me the values for each row as a list, then we have called each value of the list
 	row = sheet.row_values(i)
 #  K E Y 
 	k_word = row[0]
@@ -60,12 +63,19 @@ for i in range(1, sheet.nrows):
 	k_sentence = row[5]
 	k_translation = row[6]
 
+
+
+
+
 #  ..........  D I C T I O N A R T    T U P L E    ..............
 	dict_word_type[k_word]= (k_phonema,k_type, k_meaning, k_sound, k_sentence,k_translation) # key-> tuple
 
 	#for (k,v) in dict_word_type.items():
 	#	if 
+#
+#type_list=list(set(type_list))
 
+#print (type_list)
 
 #print(dict_word_type)
 #print(dict_word_type["elsker"])
@@ -221,7 +231,7 @@ for line in fhand:
 	current_line=0
 
 	PATH_XLS_FILE='C:\\Users\\Ana Maria\\Documents\\DS\\APP_DK_ord\\'
-	workbook = xlsxwriter.Workbook( PATH_XLS_FILE  + "DK_WORDS_0.xlsx" )
+	workbook = xlsxwriter.Workbook( PATH_XLS_FILE  + "DK_WORD_3.xlsx" )
 	
 	# Call a Workbook() function of openpyxl  
 	# to create a new blank Workbook object 
@@ -246,7 +256,12 @@ for line in fhand:
 # -------------------- C R E A T I N G   W O R K S H E E T  "A L L  T Y P E S"  ------------------------------------	
 # Creating Worksheets
 	current_sheet = workbook.add_worksheet("ALL_TYPES")
-#	current_sheet = workbook.add_worksheet("Sounds")
+
+#	for word_type in (type_list):
+
+#		new_sheet = workbook.add_worksheet(word_type)
+
+
 #	current_sheet = workbook.add_worksheet("Vocabulary")
 #	current_sheet = workbook.add_worksheet("Conjunction")
 
@@ -257,6 +272,8 @@ for line in fhand:
 	current_sheet.write(0, 4 , "Sound", cell_format)
 	current_sheet.write(0, 5 , "Sentence", cell_format)
 	current_sheet.write(0, 6 , "Translation", cell_format)
+
+
 
 
 # -------------------- C E L L  C O N T E N T   F O R M A T ------------------------------------	
@@ -270,7 +287,7 @@ for line in fhand:
 
 
 # -------------------- C E L L  C O N T E N T  A N D   F O R M A T ------------------------------------	
-
+	type_list=list()
 	for all_word in dict_word_type:
 		(all_phonema, all_type, all_meaning, all_sound, all_sentences, all_translation) = dict_word_type[all_word]
 
@@ -289,8 +306,23 @@ for line in fhand:
 		current_sheet.write(current_line, 5 , all_sentences, cell_format_2 )
 		current_sheet.write(current_line, 6 , all_translation, cell_format_2)
 
+#   Get a list of type of word without duplication and with a max of 20 characters
+	
+		type_list.append(all_type[:20])
+	type_list=list(set(type_list))
+	type_list_sorted=sorted(type_list,reverse=True)
+	print(type_list_sorted)
+
+
 # -------------------- C R E A T I N G   W O R K S H E E T  "V E R B S"------------------------------------	
-# Creating Worksheets
+# Creating word type Worksheets
+
+	for word_type in (type_list_sorted):
+ 
+		new_sheet=workbook.add_worksheet(word_type)
+
+
+
 #	current_sheet = workbook.add_worksheet("ALL_TYPES")
 #	current_sheet = workbook.add_worksheet("Verbs")
 #	current_sheet = workbook.add_worksheet("Vocabulary")
@@ -303,7 +335,7 @@ workbook.close()
 
 
 import os
-os.system("start EXCEL.EXE "  + "\"" +PATH_XLS_FILE + "DK_WORDS_0.xlsx" + "\"")
+os.system("start EXCEL.EXE "  + "\"" +PATH_XLS_FILE + "DK_WORD_3.xlsx" + "\"")
 
 
 
