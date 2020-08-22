@@ -233,17 +233,9 @@ for line in fhand:
 	PATH_XLS_FILE='C:\\Users\\Ana Maria\\Documents\\DS\\APP_DK_ord\\'
 	workbook = xlsxwriter.Workbook( PATH_XLS_FILE  + "DK_WORD_3.xlsx" )
 	
-	# Call a Workbook() function of openpyxl  
-	# to create a new blank Workbook object 
-	# workbook = openpyxl.Workbook() 
-  	# Get workbook active sheet   
-	# from the active attribute.  
-	# sheet = workbook.active 
-  	# writing to the specified cell 
-	# sheet.column_dimensions['E'].width = 50
-	# workbook.save(  PATH_XLS_FILE  + "DK_WORDS.xlsx") 
-	#worksheet1.set_column(20, 20, 20,50)
 	
+
+
 # -------------------- C E L L  H E A D E R  F O R M A T ------------------------------------	
 		# Cell color for header names - Tipo B Tipo C Tipo D  Period  Intensity
 	cell_format = workbook.add_format({'bold': True, 'font_color': 'white'})
@@ -255,15 +247,11 @@ for line in fhand:
 
 # -------------------- C R E A T I N G   W O R K S H E E T  "A L L  T Y P E S"  ------------------------------------	
 # Creating Worksheets
+	
+	
 	current_sheet = workbook.add_worksheet("ALL_TYPES")
 
-#	for word_type in (type_list):
-
-#		new_sheet = workbook.add_worksheet(word_type)
-
-
-#	current_sheet = workbook.add_worksheet("Vocabulary")
-#	current_sheet = workbook.add_worksheet("Conjunction")
+# -------------------- H E A D I N G   C O N T E N T   F O R M A T ------------------------------------	
 
 	current_sheet.write(0, 0 , "Word", cell_format)
 	current_sheet.write(0, 1 , "Phonema", cell_format)
@@ -272,9 +260,6 @@ for line in fhand:
 	current_sheet.write(0, 4 , "Sound", cell_format)
 	current_sheet.write(0, 5 , "Sentence", cell_format)
 	current_sheet.write(0, 6 , "Translation", cell_format)
-
-
-
 
 # -------------------- C E L L  C O N T E N T   F O R M A T ------------------------------------	
 		# Cell color for header names - Tipo B Tipo C Tipo D  Period  Intensity
@@ -288,6 +273,11 @@ for line in fhand:
 
 # -------------------- C E L L  C O N T E N T  A N D   F O R M A T ------------------------------------	
 	type_list=list()
+	list_type=list()
+	list_type_string=" "
+
+	# R E A D I N  G   D I C T I O N A R Y
+
 	for all_word in dict_word_type:
 		(all_phonema, all_type, all_meaning, all_sound, all_sentences, all_translation) = dict_word_type[all_word]
 
@@ -308,31 +298,80 @@ for line in fhand:
 
 #   Get a list of type of word without duplication and with a max of 20 characters
 	
-		type_list.append(all_type[:20])
-	type_list=list(set(type_list))
-	type_list_sorted=sorted(type_list,reverse=True)
-	print(type_list_sorted)
+		list_type.append(all_type)
+		
+	
+	
+	list_type=list(set(list_type))
+	#print(Fore.GREEN +str(list_type))
+	#print(Fore.GREEN + list_type)
+	
+	#  Reduce the name of the word types to be able to create worksheets
+	#type_list.append(all_type[:20])
+	
+	#type_list=list(set(type_list))
+	#type_list_sorted=sorted(type_list,reverse=True)
+	list_type_sorted=sorted(list_type,reverse=True)
+	#print(type_list_sorted)
 
 
-# -------------------- C R E A T I N G   W O R K S H E E T  "V E R B S"------------------------------------	
+# -------------------- C R E A T I N G   W O R K S H E E T  "T Y P E S"------------------------------------	
 # Creating word type Worksheets
 
-	for word_type in (type_list_sorted):
- 
-		new_sheet=workbook.add_worksheet(word_type)
+	for word_type in (list_type_sorted):
+		cut_word_type=word_type[:10]
+		current_sheet=workbook.get_worksheet_by_name(cut_word_type)
+		if current_sheet==None: 
+			current_sheet=workbook.add_worksheet(cut_word_type)
+
+# -------------------- H E A D I N G   C O N T E N T   F O R M A T ------------------------------------	
+
+		current_sheet.write(0, 0 , "Word", cell_format)
+		current_sheet.write(0, 1 , "Phonema", cell_format)
+		current_sheet.write(0, 2 , "Type", cell_format)
+		current_sheet.write(0, 3 , "Meaning", cell_format)
+		current_sheet.write(0, 4 , "Sound", cell_format)
+		current_sheet.write(0, 5 , "Sentence", cell_format)
+		current_sheet.write(0, 6 , "Translation", cell_format)
+
+# -------------------- C E L L  C O N T E N T   F O R M A T ------------------------------------	
+		# Cell color for header names - Tipo B Tipo C Tipo D  Period  Intensity
+	#----	cell_format_2 = workbook.add_format({'bold': False, 'font_color': 'black'})
+	#cell_format.set_bg_color('#004C99')
+	#---	cell_format_2.set_text_wrap()
+	#cell_format.set_align('center')
+	#cell_format_2.set_align('top')
+	#cell_format_2.set_border(1)
 
 
+# -------------------- C E L L  C O N T E N T  A N D   F O R M A T ------------------------------------	
+#		type_list=list()
+		current_line=0
+		for all_word in dict_word_type:
+		#	print(all_word)
 
-#	current_sheet = workbook.add_worksheet("ALL_TYPES")
-#	current_sheet = workbook.add_worksheet("Verbs")
-#	current_sheet = workbook.add_worksheet("Vocabulary")
-#	current_sheet = workbook.add_worksheet("Conjunction")
+		# READING DICTIONARY
+			(all_phonema, all_type, all_meaning, all_sound, all_sentences, all_translation) = dict_word_type[all_word]
 
+
+				#print(grammar)
+			if word_type==all_type:
+
+				current_sheet.set_column('A:A', 20)
+				current_sheet.set_column('C:C', 20)
+				current_sheet.set_column('D:D', 25)
+				current_sheet.set_column('F:F', 80) 
+				current_sheet.set_column('G:G', 80)
+				current_line= current_line + 1
+				current_sheet.write(current_line, 0 , all_word)
+				current_sheet.write(current_line, 1 , all_phonema )
+				current_sheet.write(current_line, 2 ,all_type)
+				current_sheet.write(current_line, 3 , all_meaning)
+				current_sheet.write(current_line, 4 , all_sound)
+				current_sheet.write(current_line, 5 , all_sentences, cell_format_2 )
+				current_sheet.write(current_line, 6 , all_translation, cell_format_2)
 
 workbook.close()
-#	file.write(type_word)
-#	file.write("\n")
-
 
 import os
 os.system("start EXCEL.EXE "  + "\"" +PATH_XLS_FILE + "DK_WORD_3.xlsx" + "\"")
