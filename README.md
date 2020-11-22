@@ -6,7 +6,7 @@ This tool creates, registers and storages the words and its properties from an i
 Its properties are:
 
 - Meaning in english, 
-- Grammatical property 
+- Grammatical property (adjective, verbs, noun, etc)
 - Sound
 - Phoneme 
 - Sentence that contains the word
