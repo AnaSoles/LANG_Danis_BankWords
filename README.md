@@ -5,12 +5,12 @@ This tool creates, registers and storages the words and its properties from an i
 
 Its properties are:
 
-- Meaning in english, 
-- Grammatical property (adjective, verbs, noun, etc)
-- Sound
-- Phoneme 
-- Sentence that contains the word
-- English sentence's translation 
+- Meaning in english.
+- Grammatical property (adjective, verbs, noun, etc).
+- Sound (mp3).
+- Phoneme.
+- Sentence that contains the word.
+- English sentence translation.
 
 ## Source
 
