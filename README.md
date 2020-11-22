@@ -1,7 +1,16 @@
 # Learning Danish Words
 ## Introduction
 
-This tool creates, registers and storages the words that you have read in Danish Language with their english meaning, grammatical type, sound, phoneme and the sentence where it come from and the translation of the complete sentence. 
+This tool creates, registers and storages the words and its properties from an input Danish Language text.  
+
+Its properties are:
+
+- Meaning in english, 
+- Grammatical property 
+- Sound
+- Phoneme 
+- Sentence that contains the word
+- English sentence's translation 
 
 ## Source
 
