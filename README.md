@@ -22,29 +22,28 @@ https://en.bab.la/dictionary/danish-english
 
 ## Procedure
 
-A way to read is passing through each word in a sentence, trying to find the meaning of each word and also the tense of the sentence.
-For that reason in this tool it is necessary to add the sentence we want to understand as main input.
+From a sentence given as a text, the tool take each word and look after their meaning and the word properties in the Danish dictionary (Ordnet).
+After that the result is print in an Excel file.
 
 ### Input Files:
 
-- Excel Sheet with specified columns
-- ASSCCI Text, where you add the sentence to translate and to register
+- Excel Sheet with specified columns, word properties(meaning, phoneme, grammar type, etc)
+- ASSCCI Text, where you add the sentence (input).
 
 ### Output File:
-- Excel Sheet with the words  and properties of the words added
+- Excel Sheet with the words and properties from the sentence.
 
 ![sheetJPG](https://user-images.githubusercontent.com/52880203/90572036-58986780-e1b3-11ea-8695-4f7faa48e8c2.JPG)
 
 ### Steps
 
- - Modify the path name with the one you have your excel sheet file and text file in **line29** .
-
+ - Modify the Excel sheet file path by yours in **line29** .
 
 
 PATH_XLS_FILE='C:\\Users\\Ana Maria\\Documents\\DS\\APP_DK_ord\\'
 
 
-- Modify the name of your excel sheet as the one you have in **line 43**
+- Modify the name of your Excel sheet as the one you have in **line 43**
 
 book = open_workbook('DK_WORDS_0.xlsx')
 
