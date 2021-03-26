@@ -3,6 +3,8 @@
 
 This tool creates, registers and storages the words and its properties from an input Danish Language text.  
 
+From a sentence given as a text, the tool take each word and look after their meaning and the word properties in the Danish dictionary (Ordnet).
+After that the result is print in an Excel file.
 Its properties are:
 
 - Meaning in english.
@@ -20,10 +22,14 @@ https://ordnet.dk
 - English-Danish Dictionary
 https://en.bab.la/dictionary/danish-english
 
-## Procedure
+## App to install
+In order this tool works it needs some installations
 
-From a sentence given as a text, the tool take each word and look after their meaning and the word properties in the Danish dictionary (Ordnet).
-After that the result is print in an Excel file.
+googletrans - for translate sentence
+xlsxwriter - to work with excel files
+BeautifulSoup - to extract data from webpages
+sys - for color in the command prompt
+
 
 ### Input Files:
 
