@@ -12,7 +12,7 @@ Its properties are:
 - Sentence that contains the word.
 - English sentence translation.
 
-## Source
+## Data Source
 
 - Danish Dictionary
 https://ordnet.dk
